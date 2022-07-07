@@ -20,6 +20,15 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -111,104 +120,8 @@ public class SubmitQuizController {
         return index;
     }
 
-
-
     public  String getReportTemplate()
     {
-         FileResource resource = fileResourceRepository.findAll().get(0);
-          if(resource.getUrl() == null || resource.getUrl().isEmpty())
-          {
-              resource.setUrl("https://img.freepik.com/free-vector/studying-concept-illustration_114360-1301.jpg?w=2000");
-          }
-//        return "<!DOCTYPE html>\n" +
-//                "<html>\n" +
-//                "<head>\n" +
-//                "    <style>\n" +
-//                "        @page {\n" +
-//                "            size: A4;\n" +
-//                "            margin: 0;\n" +
-//                "            }\n" +
-//                "\n" +
-//                "    @media screen{\n" +
-//                "    .page-number:before {\n" +
-//                "        counter-increment: page;\n" +
-//                "        content: \"Page \" counter(page);\n" +
-//                "        }\n" +
-//                "     }\n" +
-//                "\n" +
-//                "table {\n" +
-//                "  border-collapse: collapse;\n" +
-//                "  width: 100%;\n" +
-//                "}\n" +
-//                "\n" +
-//                "th, td {\n" +
-//                "  text-align: left;\n" +
-//                "  padding: 8px;\n" +
-//                "}\n" +
-//                "\n" +
-//                ".h2Heading\n" +
-//                "{\n" +
-//                "  text-align: center;\n" +
-//                "}\n" +
-//                "\n" +
-//                ".para001\n" +
-//                "{\n" +
-//                "  text-align: center;\n" +
-//                "  margin-left: 20%;\n" +
-//                "  margin-right: 20%;\n" +
-//                "}\n" +
-//                ".divFirst\n" +
-//                "{\n" +
-////                "  background-color: #EBF5FB;\n" +
-//                "  border-radius: 10px;\n" +
-//                "  padding: 20px;\n" +
-//                "}\n" +
-//                "\n" +
-//                "tr:nth-child(even) {background-color: #f2f2f2;}\n" +
-//                "</style>\n" +
-//                "</head>\n" +
-//                "<body>\n" +
-//                "\n" +
-////                "<div class=\"divFirst\">\n" +
-////                "    <h2 class=\"h2Heading\">Responsive Table</h2>\n" +
-////                "    <p class=\"para001\">A responsive table will display a horizontal scroll bar if the screen is too\n" +
-////                "        small to display the full content. Resize the browser window to see the effect:</p>\n" +
-////                "\n" +
-//                "    <div style=\"position: relative;text-align: center;\">\n" +
-//                "        <img " +
-//                "src="+resource.getUrl()+" " +
-//                "height=\"300\" width=\"400\"  >\n" +
-//                "    </div>\n" +
-//                "\n" +
-//                "\n" +
-//                "</div>\n" +
-//                "\n" +
-//                "<div style=\"overflow-x: auto;padding: 20px;\">\n" +
-//                "    <table>\n" +
-//                "        <tr style=\"background-color: #D1E2F9;\">\n" +
-//                "            <th>SNO</th>\n" +
-//                "            <th>ATTEMPT-QUESTION</th>\n" +
-//                "            <th>CORRECT-ANSWER</th>\n" +
-//                "            <th>PERCENTAGE</th>\n" +
-//                "            <th>TOTAL QUESTIONS</th>\n" +
-//                "            <th>WRONG ANSWERS </th>\n" +
-//                "            <th>TIME DURATION</th>\n" +
-//                "        </tr>\n" +
-//                "        <tr>\n" +
-//                "            <td>1</td>\n" +
-//                "            <td>{{attemptQuestions}}</td>\n" +
-//                "            <td>{{correctAnswer}}</td>\n" +
-//                "            <td>{{percentage}}</td>\n" +
-//                "            <td>{{totalQuestion}}</td>\n" +
-//                "            <td>{{wrongAnswer}}</td>\n" +
-//                "            <td>{{timeDuration}}</td>\n" +
-//                "        </tr>\n" +
-//                "    </table>\n" +
-//                "</div>\n" +
-//                "\n" +
-//                "</body>\n" +
-//                "</html>\n" +
-//                "\n";
 
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
@@ -325,7 +238,7 @@ public class SubmitQuizController {
                 "\n" +
                 "    <div style=\"position: relative;text-align: center;\">\n" +
                 " <img " +
-                "src="+resource.getUrl()+" " +
+                "src=" +
                 " height=\"300\" width=\"400\"  >\n" +
                 "    </div>\n" +
                 "\n" +
@@ -407,6 +320,8 @@ public class SubmitQuizController {
                 "</html>\n" +
                 "\n";
     }
+
+
 
 
 

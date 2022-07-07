@@ -2,6 +2,8 @@ package com.exam.secure.adminControllers.categoryController;
 
 import com.exam.secure.adminControllers.adminUrlMappings.CategoryUrlMappings;
 import com.exam.secure.adminControllers.adminUrlMappings.RootMapping;
+import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
+import com.exam.secure.entities.categoryEntities.QuestionsAnswerModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.RootCategoryInterface;
 import com.exam.secure.payload.response.MessageResponse;
@@ -93,6 +95,20 @@ public class RootCategoryController {
         }
     }
 
+
+    @GetMapping(CategoryUrlMappings.GET_ALL_SETS_BY_ROOT_ID)
+    public ResponseEntity<?> getAllSetsByRootId(@PathVariable Long id)
+    {
+        List<QuestionSetsModel> rootCategoryData =  this.rootCategoryInterface.getAllSetsByRootId(id);
+        if(rootCategoryData != null)
+        {
+            return ResponseEntity.ok(rootCategoryData);
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+        }
+    }
 
     @GetMapping(CategoryUrlMappings.SEARCH_BY_ROOT_CATEGORY_KEY)
     public ResponseEntity<?> searchByRootCategoryKey(@PathVariable String key)

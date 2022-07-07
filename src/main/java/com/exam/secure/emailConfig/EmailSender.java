@@ -12,13 +12,19 @@ import java.util.Properties;
 public class EmailSender {
 
     public static boolean sendEmail(String email ,String content) throws MessagingException, IOException {
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        String host="smtp.gmail.com";
+        Properties properties = System.getProperties();
+        System.out.println("PROPERTIES "+properties);
+        //setting important information to properties object
+        //host set
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port","465");
+        properties.put("mail.smtp.ssl.enable","true");
+        properties.put("mail.smtp.auth","true");
+        properties.put("authentication", "plain");
+        properties.put("domain", "gmail.com");
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("ishumessi2@gmail.com", "stiyzsvxyrlzbyhc");
             }

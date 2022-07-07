@@ -10,6 +10,9 @@ public class CategoryUrlMappings {
     public static final String GET_ALL_ROOT_CATEGORY= "getAllRootCategory";
     public static final String UPLOAD_ROOT_CATEGORY_FILE= "uploadRootCategoryFile/{id}";
 
+    public static final String GET_ALL_SETS_BY_ROOT_ID= "getAllSetsByRootId/{id}";
+
+
 
     public static final String CREATE_SUB_CATEGORY= "createSubCategory";
     public static final String UPDATE_SUB_CATEGORY= "updateSubCategory";

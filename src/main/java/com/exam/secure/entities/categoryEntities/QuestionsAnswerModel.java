@@ -47,7 +47,7 @@ public class QuestionsAnswerModel {
     @Column(length = 1000)
     private String description;
 
-    private boolean status = false;
+    private boolean status = true;
 
     @Column(length = 1000)
     private String fileUrl;

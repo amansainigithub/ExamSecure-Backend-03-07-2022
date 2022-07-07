@@ -4,8 +4,12 @@ import com.amazonaws.services.importexport.model.InvalidCustomsException;
 import com.exam.secure.adminControllers.adminUrlMappings.CategoryUrlMappings;
 import com.exam.secure.bucket.bucketModels.BucketModel;
 import com.exam.secure.bucket.bucketService.BucketService;
+import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
+import com.exam.secure.entities.categoryEntities.QuestionsAnswerModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.RootCategoryInterface;
+import com.exam.secure.repository.categoryRepository.QuestionAnswerRepository;
+import com.exam.secure.repository.categoryRepository.QuestionSetsRepository;
 import com.exam.secure.repository.categoryRepository.RootCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,13 @@ public class RootCategoryService implements RootCategoryInterface {
 
     @Autowired
     private RootCategoryRepository rootCategoryRepository;
+
+
+    @Autowired
+    private QuestionAnswerRepository  questionAnswerRepository;
+
+    @Autowired
+    private QuestionSetsRepository questionSetsRepository;
 
     @Override
     @PostMapping(CategoryUrlMappings.CREATE_ROOT_CATEGORY)
@@ -98,5 +109,37 @@ public class RootCategoryService implements RootCategoryInterface {
     @Override
     public List<RootCategoryModel> searchByRootCategoryKey(String key) {
       return this.rootCategoryRepository.findByRootCategoryNameContaining(key);
+    }
+
+    @Override
+    public List<QuestionSetsModel>  getAllSetsByRootId(Long id) {
+
+        RootCategoryModel  rootCategoryModel =  this.rootCategoryRepository.findById(id).get();
+        if(rootCategoryModel.getSubCategoryModel() != null)
+        {
+           if(rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel() != null )
+           {
+               if(rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel().get(0).getBranchModel() != null)
+               {
+                   if(rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels() != null)
+                   {
+                       if(rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels() != null)
+                       {
+                           if(rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels().get(0).getChaptersModel() != null)
+                           {
+                               if(rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels().get(0).getChaptersModel() != null)
+                               {
+                                   Long ids =   rootCategoryModel.getSubCategoryModel().get(0).getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels().get(0).getChaptersModel().getId();
+
+                                   return  this.questionSetsRepository.getQuestionSetByChapterId(ids);
+
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+        }
+        return null;
     }
 }

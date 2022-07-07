@@ -1,5 +1,7 @@
 package com.exam.secure.interfaces.categoryInterfaces;
 
+import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
+import com.exam.secure.entities.categoryEntities.QuestionsAnswerModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,4 +22,7 @@ public interface RootCategoryInterface {
     RootCategoryModel uploadRootCategoryFile(MultipartFile file , Long id);
 
     List<RootCategoryModel> searchByRootCategoryKey(String key);
+
+    List<QuestionSetsModel> getAllSetsByRootId(Long id);
+
 }

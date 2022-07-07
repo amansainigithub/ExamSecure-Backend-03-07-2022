@@ -13,4 +13,6 @@ public interface QuestionAnswerRepository extends JpaRepository<QuestionsAnswerM
 
     @Query("SELECT u FROM QuestionsAnswerModel u WHERE u.questionSetsModel.id = :id")
     List<QuestionsAnswerModel> getQuestionAnswerByQuestionSetId(@Param("id") Long id);
+
+    List<QuestionsAnswerModel> findTop10ByOrderByIdDesc();
 }

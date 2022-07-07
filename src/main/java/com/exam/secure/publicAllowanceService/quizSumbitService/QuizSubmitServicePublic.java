@@ -135,11 +135,17 @@ public class QuizSubmitServicePublic implements SubmitQuizInterface {
 
     public  String getReportTemplate(  ResultModel resultModel )
     {
-        FileResource resource = fileResourceRepository.findAll().get(0);
-        if(resource.getUrl() == null || resource.getUrl().isEmpty())
-        {
-            resource.setUrl("https://img.freepik.com/free-vector/studying-concept-illustration_114360-1301.jpg?w=2000");
-        }
+//      try {
+//          FileResource resource = fileResourceRepository.findAll().get(0);
+//          if(resource.getUrl() == null || resource.getUrl().isEmpty())
+//          {
+//              resource.setUrl("https://img.freepik.com/free-vector/studying-concept-illustration_114360-1301.jpg?w=2000");
+//          }
+//      }
+//      catch (Exception e)
+//      {
+//          e.printStackTrace();
+//      }
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -255,7 +261,7 @@ public class QuizSubmitServicePublic implements SubmitQuizInterface {
                 "\n" +
                 "    <div style=\"position: relative;text-align: center;\">\n" +
                 " <img " +
-                "src="+resource.getUrl()+" " +
+                "src="+"https://images.unsplash.com/photo-1649859394657-8762d8a4758a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1552&q=80"+" " +
                 " height=\"300\" width=\"400\"  >\n" +
                 "    </div>\n" +
                 "\n" +
@@ -349,155 +355,5 @@ public class QuizSubmitServicePublic implements SubmitQuizInterface {
                 "</html>\n" +
                 "\n";
     }
-
-
-//   private String getSendContent(ResultModel resultModel)
-//    {
-//        String content = null;
-//          return content = "<table class=\"table\">\n" +
-//                    "  <thead class=\"thead-dark\">\n" +
-//                    "    <tr>\n" +
-//                    "      <th scope=\"col\">1</th>\n" +
-//                    "      <th scope=\"col\">ATTEMPT-QUESTIONS</th>\n" +
-//                    "      <th scope=\"col\">CORRECT-ANSWER</th>\n" +
-//                    "      <th scope=\"col\">PERCENTAGE</th>\n" +
-//                    "      <th scope=\"col\">TOTAL QUESTIONS</th>\n" +
-//                    "      <th scope=\"col\">WRONG ANSWERS</th>\n" +
-//                    "      <th scope=\"col\">TIME DURATION</th>\n" +
-//                    "    </tr>\n" +
-//                    "  </thead>\n" +
-//                    "  <tbody>\n" +
-//                    "    <tr>\n" +
-//                    "      <th scope=\"row\">" +
-//                                      1 +
-//                                      "</th>\n" +
-//                    "      <td>" +
-//                            resultModel.getAttemptQuestions()+
-//                          "</td>\n" +
-//                    "      <td>" +
-//                            resultModel.getCorrectAnswer()+
-//                          "</td>\n" +
-//                    "      <td>" +
-//                            resultModel.getPercentage()+
-//                            "</td>\n" +
-//                          "      <td>" +
-//                          resultModel.getTotalQuestion()+
-//                          "</td>\n" +
-//                          "      <td>" +
-//                          resultModel.getWrongAnswer()+
-//                          "</td>\n" +          "      <td>" +
-//                          resultModel.getTimeDuration()+
-//                          "</td>\n" +
-//
-//                    "    </tr>\n" +
-//                    "  </tbody>\n" +
-//                    "</table>";
-//    }
-
-//    private String getSendContent(ResultModel resultModel) {
-//         String content = "<!DOCTYPE html>\n" +
-//                "<html>\n" +
-//                "<head>\n" +
-//                "    <style>\n" +
-//                "        @page {\n" +
-//                "            size: A4;\n" +
-//                "            margin: 0;\n" +
-//                "            }\n" +
-//                "\n" +
-//                "    @media screen{\n" +
-//                "    .page-number:before {\n" +
-//                "        counter-increment: page;\n" +
-//                "        content: \"Page \" counter(page);\n" +
-//                "        }\n" +
-//                "     }\n" +
-//                "\n" +
-//                "table {\n" +
-//                "  border-collapse: collapse;\n" +
-//                "  width: 100%;\n" +
-//                "}\n" +
-//                "\n" +
-//                "th, td {\n" +
-//                "  text-align: left;\n" +
-//                "  padding: 8px;\n" +
-//                "}\n" +
-//                "\n" +
-//                ".h2Heading\n" +
-//                "{\n" +
-//                "  text-align: center;\n" +
-//                "}\n" +
-//                "\n" +
-//                ".para001\n" +
-//                "{\n" +
-//                "  text-align: center;\n" +
-//                "  margin-left: 20%;\n" +
-//                "  margin-right: 20%;\n" +
-//                "}\n" +
-//                ".divFirst\n" +
-//                "{\n" +
-//                "  background-color: #EBF5FB;\n" +
-//                "  border-radius: 10px;\n" +
-//                "  padding: 20px;\n" +
-//                "}\n" +
-//                "\n" +
-//                "tr:nth-child(even) {background-color: #f2f2f2;}\n" +
-//                "</style>\n" +
-//                "</head>\n" +
-//                "<body>\n" +
-//                "\n" +
-//                "<div class=\"divFirst\">\n" +
-//                "    <h2 class=\"h2Heading\">Responsive Table</h2>\n" +
-//                "    <p class=\"para001\">A responsive table will display a horizontal scroll bar if the screen is too\n" +
-//                "        small to display the full content. Resize the browser window to see the effect:</p>\n" +
-//                "\n" +
-//                "    <div style=\"position: relative;text-align: center;\">\n" +
-//                "        <img src=\"https://ouch-cdn2.icons8.com/OG0eOJXFSXFmZVskpcm-epiIi5NoEY86Qk1X5aHfMjQ/rs:fit:912:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNzk1/LzE3MTU2NTJlLTJh/MjktNDM0MC1hN2Iy/LTM2MGIzZTZiNzYx/YS5zdmc.png\" height=\"400\" width=\"400\"  >\n" +
-//                "    </div>\n" +
-//                "\n" +
-//                "\n" +
-//                "</div>\n" +
-//                "\n" +
-//                "<div style=\"overflow-x: auto;padding: 20px;\">\n" +
-//                "    <table>\n" +
-//                "        <tr style=\"background-color: #D1E2F9;\">\n" +
-//                "            <th>SNO</th>\n" +
-//                "            <th>ATTEMPT-QUESTION</th>\n" +
-//                "            <th>CORRECT-ANSWER</th>\n" +
-//                "            <th>PERCENTAGE</th>\n" +
-//                "            <th>TOTAL QUESTIONS</th>\n" +
-//                "            <th>WRONG ANSWERS </th>\n" +
-//                "            <th>TIME DURATION</th>\n" +
-//                "        </tr>\n" +
-//                "        <tr>\n" +
-//                "            <td>1</td>\n" +
-//                "            <td>" +
-//                "" + resultModel.getAttemptQuestions() +
-//                "</td>\n" +
-//                "            <td>" +
-//                "" + resultModel.getCorrectAnswer() +
-//                "</td>\n" +
-//                "            <td>" +
-//                "" + resultModel.getPercentage() +
-//                "</td>\n" +
-//                "            <td>" +
-//                "" + resultModel.getTotalQuestion() +
-//                "</td>\n" +
-//                "            <td>" +
-//                "" + resultModel.getWrongAnswer() +
-//                "</td>\n" +
-//                "            <td>" +
-//                "" + resultModel.getTimeDuration() +
-//                "</td>\n" +
-//                "        </tr>\n" +
-//                "    </table>\n" +
-//                "</div>\n" +
-//                "\n" +
-//                "</body>\n" +
-//                "</html>\n" +
-//                "\n";
-//
-//        return content;
-//    }
-
-
 
 }
