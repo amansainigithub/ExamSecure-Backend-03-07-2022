@@ -14,4 +14,7 @@ public interface QuestionSetsRepository extends JpaRepository<QuestionSetsModel,
     @Query("SELECT u FROM QuestionSetsModel u WHERE u.chaptersModel.id = :id")
     List<QuestionSetsModel> getQuestionSetByChapterId(@Param("id") Long id);
 
+    @Query("SELECT u FROM QuestionSetsModel u WHERE u.chaptersModel.branchModel.bottomCategoryModel.subCategoryModel.id = :id")
+    List<QuestionSetsModel> getQuestionSetBySubCategoryId(@Param("id") Long id);
+
 }

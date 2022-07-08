@@ -3,9 +3,7 @@ package com.exam.secure.services.categoryServices;
 import com.amazonaws.services.importexport.model.InvalidCustomsException;
 import com.exam.secure.bucket.bucketModels.BucketModel;
 import com.exam.secure.bucket.bucketService.BucketService;
-import com.exam.secure.customModels.CustomSubCategoryModel;
 import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
-import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import com.exam.secure.entities.categoryEntities.SubCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.SubCategoryInterface;
 import com.exam.secure.repository.categoryRepository.QuestionSetsRepository;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -115,53 +112,8 @@ public class SubCategoryService implements SubCategoryInterface {
     }
 
     @Override
-    public List<CustomSubCategoryModel> getAllSetsBySubId(Long id) {
-
-        SubCategoryModel  subCategoryModel =  this.subCategoryRepository.findById(id).get();
-
-        if(subCategoryModel != null)
-        {
-
-            if(subCategoryModel.getBottomCategoryModel() != null )
-            {
-                if(subCategoryModel.getBottomCategoryModel().get(0).getBranchModel() != null)
-                {
-                    if(subCategoryModel.getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels() != null)
-                    {
-                        if(subCategoryModel.getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels() != null)
-                        {
-                            if(subCategoryModel.getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels().get(0).getChaptersModel() != null)
-                            {
-                                if(subCategoryModel.getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels().get(0).getChaptersModel() != null)
-                                {
-                                    Long ids =   subCategoryModel.getBottomCategoryModel().get(0).getBranchModel().get(0).getChaptersModels().get(0).getQuestionSetsModels().get(0).getChaptersModel().getId();
-
-                                    List<QuestionSetsModel> questionSetsModelsList = this.questionSetsRepository.getQuestionSetByChapterId(ids);
-
-                                    List<CustomSubCategoryModel> customSubList =new ArrayList<>();
-                                    for(QuestionSetsModel questionSetsModel : questionSetsModelsList)
-                                    {
-                                        CustomSubCategoryModel customSubCategoryModel =new CustomSubCategoryModel();
-                                        customSubCategoryModel.setId(questionSetsModel.getId());
-                                        customSubCategoryModel.setQuestionSetName(questionSetsModel.getQuestionSetName());
-                                        customSubCategoryModel.setStatus(questionSetsModel.isStatus());
-                                        customSubCategoryModel.setPassPercentage(questionSetsModel.getPassPercentage());
-                                        customSubCategoryModel.setQuestionLength(questionSetsModel.getQuestionsAnswerModel().size());
-                                        customSubCategoryModel.setBgColor(questionSetsModel.getBgColor());
-                                        customSubList.add(customSubCategoryModel);
-                                    }
-
-                                    return customSubList;
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return null;
+    public List<QuestionSetsModel> getAllSetsBySubId(Long id) {
+       return this.questionSetsRepository.getQuestionSetBySubCategoryId(id);
     }
 
 }
