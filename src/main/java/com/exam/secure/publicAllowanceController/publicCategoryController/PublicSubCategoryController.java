@@ -1,5 +1,8 @@
 package com.exam.secure.publicAllowanceController.publicCategoryController;
 
+import com.exam.secure.adminControllers.adminUrlMappings.CategoryUrlMappings;
+import com.exam.secure.customModels.CustomSubCategoryModel;
+import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
 import com.exam.secure.entities.categoryEntities.SubCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.SubCategoryInterface;
 import com.exam.secure.publicAllowanceController.urlMappings.UrlMappingPublic;
@@ -45,4 +48,21 @@ public class PublicSubCategoryController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
         }
     }
+
+
+    @GetMapping(CategoryUrlMappings.GET_ALL_SETS_BY_SUB_ID)
+    public ResponseEntity<?> getAllSetsBySubId(@PathVariable Long id)
+    {
+        List<CustomSubCategoryModel> customList =  this.subCategoryInterface.getAllSetsBySubId(id);
+        if(customList != null)
+        {
+            return ResponseEntity.ok(customList);
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+        }
+    }
+
+
 }

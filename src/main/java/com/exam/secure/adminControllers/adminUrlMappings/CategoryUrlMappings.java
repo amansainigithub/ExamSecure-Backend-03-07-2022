@@ -22,6 +22,9 @@ public class CategoryUrlMappings {
     public static final String GET_SUB_CATEGORY_BY_ROOT_CATEGORY_ID= "getSubCategoriesByRootCategoryId/{rootCategoryId}";
     public static final String UPLOAD_SUB_CATEGORY_FILE= "uploadSubCategoryFile/{id}";
 
+    public static final String GET_ALL_SETS_BY_SUB_ID= "getAllSetsBySubId/{id}";
+
+
 
 
     public static final String CREATE_BOTTOM_CATEGORY= "createBottomCategory";

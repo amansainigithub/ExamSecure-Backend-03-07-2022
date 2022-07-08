@@ -1,5 +1,7 @@
 package com.exam.secure.interfaces.categoryInterfaces;
 
+import com.exam.secure.customModels.CustomSubCategoryModel;
+import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
 import com.exam.secure.entities.categoryEntities.SubCategoryModel;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,4 +22,6 @@ public interface SubCategoryInterface {
     List<SubCategoryModel> getSubCategoriesByRootCategoryId(Long rootCategoryId);
 
     SubCategoryModel uploadSubCategoryFile(MultipartFile file, Long id);
+
+    List<CustomSubCategoryModel> getAllSetsBySubId(Long id);
 }
