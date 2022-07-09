@@ -53,7 +53,7 @@ public class PublicSubCategoryController {
     @GetMapping(CategoryUrlMappings.GET_ALL_SETS_BY_SUB_ID)
     public ResponseEntity<?> getAllSetsBySubId(@PathVariable Long id)
     {
-        List<QuestionSetsModel> customList =  this.subCategoryInterface.getAllSetsBySubId(id);
+        List<CustomSubCategoryModel> customList =  this.subCategoryInterface.getAllSetsBySubId(id);
         if(customList != null)
         {
             return ResponseEntity.ok(customList);

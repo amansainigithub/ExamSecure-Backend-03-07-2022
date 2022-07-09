@@ -3,6 +3,7 @@ package com.exam.secure.services.categoryServices;
 import com.amazonaws.services.importexport.model.InvalidCustomsException;
 import com.exam.secure.bucket.bucketModels.BucketModel;
 import com.exam.secure.bucket.bucketService.BucketService;
+import com.exam.secure.customModels.CustomSubCategoryModel;
 import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
 import com.exam.secure.entities.categoryEntities.SubCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.SubCategoryInterface;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -112,8 +114,24 @@ public class SubCategoryService implements SubCategoryInterface {
     }
 
     @Override
-    public List<QuestionSetsModel> getAllSetsBySubId(Long id) {
-       return this.questionSetsRepository.getQuestionSetBySubCategoryId(id);
+    public List<CustomSubCategoryModel> getAllSetsBySubId(Long id) {
+
+        List<CustomSubCategoryModel> customList =new ArrayList<>();
+
+        List<QuestionSetsModel> list =  this.questionSetsRepository.getQuestionSetBySubCategoryId(id);
+
+        for(QuestionSetsModel questionSetsModel : list ){
+            CustomSubCategoryModel customSubCategoryModel =new CustomSubCategoryModel();
+            customSubCategoryModel.setId(questionSetsModel.getId());
+            customSubCategoryModel.setBgColor(questionSetsModel.getBgColor());
+            customSubCategoryModel.setQuestionSetName(questionSetsModel.getQuestionSetName());
+            customSubCategoryModel.setFileUrl(questionSetsModel.getFileUrl());
+            customSubCategoryModel.setSequenceNum(questionSetsModel.getSequenceNum());
+            customSubCategoryModel.setSequenceNum(questionSetsModel.getSequenceNum());
+            customSubCategoryModel.setQuestionLength(questionSetsModel.getQuestionsAnswerModel().size());
+            customList.add(customSubCategoryModel);
+        }
+            return customList;
     }
 
 }
