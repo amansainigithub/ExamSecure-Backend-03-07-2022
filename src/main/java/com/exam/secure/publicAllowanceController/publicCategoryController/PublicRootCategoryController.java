@@ -1,6 +1,7 @@
 package com.exam.secure.publicAllowanceController.publicCategoryController;
 
 import com.exam.secure.adminControllers.adminUrlMappings.CategoryUrlMappings;
+import com.exam.secure.customModels.CustomRootModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.BottomCategoryInterface;
 import com.exam.secure.interfaces.categoryInterfaces.RootCategoryInterface;
@@ -24,7 +25,7 @@ public class PublicRootCategoryController {
     @GetMapping(UrlMappingPublic.GET_ROOT_CATEGORY_LIST_PUBLIC)
     public ResponseEntity<?> getRootCategoryListPublic()
     {
-        List<RootCategoryModel> data =  this.rootCategoryInterface.getAllRootCategory();
+        List<CustomRootModel> data =  this.rootCategoryInterface.getAllRootCategoryPublic();
         if(data != null)
         {
             return ResponseEntity.ok(data);

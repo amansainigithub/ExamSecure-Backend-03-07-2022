@@ -1,5 +1,6 @@
 package com.exam.secure.interfaces.categoryInterfaces;
 
+import com.exam.secure.customModels.CustomRootModel;
 import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
 import com.exam.secure.entities.categoryEntities.QuestionsAnswerModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
@@ -16,6 +17,8 @@ public interface RootCategoryInterface {
    public  boolean deleteRootCategoryById(Long rootCategoryId);
 
    public List<RootCategoryModel> getAllRootCategory();
+
+    public List<CustomRootModel> getAllRootCategoryPublic();
 
     RootCategoryModel getRootCategoryById(Long rootCategoryId);
 

@@ -4,19 +4,21 @@ import com.amazonaws.services.importexport.model.InvalidCustomsException;
 import com.exam.secure.adminControllers.adminUrlMappings.CategoryUrlMappings;
 import com.exam.secure.bucket.bucketModels.BucketModel;
 import com.exam.secure.bucket.bucketService.BucketService;
+import com.exam.secure.customModels.CustomRootModel;
 import com.exam.secure.entities.categoryEntities.QuestionSetsModel;
-import com.exam.secure.entities.categoryEntities.QuestionsAnswerModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.RootCategoryInterface;
 import com.exam.secure.repository.categoryRepository.QuestionAnswerRepository;
 import com.exam.secure.repository.categoryRepository.QuestionSetsRepository;
 import com.exam.secure.repository.categoryRepository.RootCategoryRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,6 +36,9 @@ public class RootCategoryService implements RootCategoryInterface {
 
     @Autowired
     private QuestionSetsRepository questionSetsRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     @PostMapping(CategoryUrlMappings.CREATE_ROOT_CATEGORY)
@@ -64,7 +69,25 @@ public class RootCategoryService implements RootCategoryInterface {
 
     @Override
     public List<RootCategoryModel> getAllRootCategory() {
-      return  this.rootCategoryRepository.findAll();
+        return  this.rootCategoryRepository.findAll();
+//
+//        List<CustomRootModel> list =new ArrayList<>();
+//        for(RootCategoryModel rootCategoryModel : rootList)
+//        {
+//            list.add(this.modelMapper.map(rootCategoryModel,CustomRootModel.class));
+//        }
+//            return  list;
+    }
+
+    public List<CustomRootModel> getAllRootCategoryPublic() {
+        List<RootCategoryModel> rootList =  this.rootCategoryRepository.findAll();
+
+        List<CustomRootModel> list =new ArrayList<>();
+        for(RootCategoryModel rootCategoryModel : rootList)
+        {
+            list.add(this.modelMapper.map(rootCategoryModel,CustomRootModel.class));
+        }
+            return  list;
     }
 
     @Override
