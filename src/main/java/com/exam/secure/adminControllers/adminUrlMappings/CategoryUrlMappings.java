@@ -34,6 +34,8 @@ public class CategoryUrlMappings {
     public static final String GET_BOTTOM_CATEGORY_BY_ID= "getBottomCategoryById/{bottomCategoryId}";
     public static final String GET_BOTTOM_CATEGORY_BY_SUB_CATEGORY_ID= "getBottomCategoriesBySubCategoryId/{subCategoryId}";
     public static final String GET_BOTTOM_CATEGORY_BY_SUB_CATEGORY_ID_RC= "getBottomCategoriesBySubCategoryIdRc/{subCategoryId}";
+    public static final String GET_BOTTOM_CATEGORY_BY_SUB_ID_RW= "getBottomCategoriesBySubIdRW/{id}";
+
     public static final String UPLOAD_BOTTOM_CATEGORY_FILE= "uploadBottomCategoryFile/{id}";
 
 

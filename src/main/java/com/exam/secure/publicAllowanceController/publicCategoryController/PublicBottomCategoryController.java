@@ -2,6 +2,7 @@ package com.exam.secure.publicAllowanceController.publicCategoryController;
 
 
 import com.exam.secure.adminControllers.adminUrlMappings.CategoryUrlMappings;
+import com.exam.secure.customModels.CustomBottomModel;
 import com.exam.secure.interfaces.categoryInterfaces.BottomCategoryInterface;
 import com.exam.secure.publicAllowanceController.modelTemp.BottomTempModel;
 import com.exam.secure.publicAllowanceController.urlMappings.UrlMappingPublic;
@@ -23,6 +24,20 @@ public class PublicBottomCategoryController {
     public ResponseEntity<?> getBottomCategoriesBySubCategoryIdRc(@PathVariable Long subCategoryId)
     {
         List<BottomTempModel> data =  this.bottomCategoryInterface.getBottomCategoriesBySubCategoryId_RC(subCategoryId);
+        if(data != null)
+        {
+            return ResponseEntity.ok(data);
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+        }
+    }
+
+    @GetMapping(CategoryUrlMappings.GET_BOTTOM_CATEGORY_BY_SUB_ID_RW)
+    public ResponseEntity<?> getBottomCategoriesBySubIdRW(@PathVariable Long id)
+    {
+        List<CustomBottomModel> data =  this.bottomCategoryInterface.getBottomCategoriesBySubIdRW(id);
         if(data != null)
         {
             return ResponseEntity.ok(data);

@@ -1,5 +1,6 @@
 package com.exam.secure.publicAllowanceController.publicCategoryController;
 
+import com.exam.secure.customModels.CustomBranchModel;
 import com.exam.secure.entities.categoryEntities.BranchModel;
 import com.exam.secure.interfaces.categoryInterfaces.BranchInterface;
 import com.exam.secure.publicAllowanceController.urlMappings.UrlMappingPublic;
@@ -44,4 +45,22 @@ public class PublicBranchController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
         }
     }
+
+
+    @GetMapping(UrlMappingPublic.GET_BRANCH_LIST_BY_SUB_ID)
+    public ResponseEntity<?> getBranchListBySubId(@PathVariable Long subId)
+    {
+        List<CustomBranchModel> data =  this.branchInterface.getBranchListBySubId(subId);
+        if(data != null)
+        {
+            return ResponseEntity.ok(data);
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+        }
+    }
+
+
+
 }

@@ -3,14 +3,17 @@ package com.exam.secure.services.categoryServices;
 import com.amazonaws.services.importexport.model.InvalidCustomsException;
 import com.exam.secure.bucket.bucketModels.BucketModel;
 import com.exam.secure.bucket.bucketService.BucketService;
+import com.exam.secure.customModels.CustomBranchModel;
 import com.exam.secure.entities.categoryEntities.BranchModel;
 import com.exam.secure.entities.categoryEntities.RootCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.BranchInterface;
 import com.exam.secure.repository.categoryRepository.BranchRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +24,9 @@ public class BranchService implements BranchInterface {
 
     @Autowired
     private BucketService bucketService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public BranchModel saveBranch(BranchModel branchModel) {
@@ -80,6 +86,38 @@ public class BranchService implements BranchInterface {
         }
         return data;
     }
+
+
+    @Override
+    public List<CustomBranchModel> getBranchListBySubId(Long subId) {
+        ArrayList<CustomBranchModel> list = null;
+        try {
+            List<BranchModel> data  =  this.branchRepository.getBranchListBySubId(subId);
+            list  = new ArrayList<>();
+
+            if(data != null)
+            {
+                for(BranchModel branchModel : data)
+                {
+                    CustomBranchModel customBranchModel =new CustomBranchModel();
+                    customBranchModel.setId(branchModel.getId());
+                    customBranchModel.setBgColor(branchModel.getBgColor());
+                    customBranchModel.setFileUrl(branchModel.getFileUrl());
+                    customBranchModel.setStatus(branchModel.isStatus());
+                    customBranchModel.setBranchName(branchModel.getBranchName());
+                    customBranchModel.setChaptersModels(branchModel.getChaptersModels());
+                    list.add(customBranchModel);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
 
     @Override
     public BranchModel uploadBranchCategoryFile(MultipartFile file, Long id) {

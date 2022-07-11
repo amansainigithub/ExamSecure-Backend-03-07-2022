@@ -4,6 +4,7 @@ package com.exam.secure.services.categoryServices;
 import com.amazonaws.services.importexport.model.InvalidCustomsException;
 import com.exam.secure.bucket.bucketModels.BucketModel;
 import com.exam.secure.bucket.bucketService.BucketService;
+import com.exam.secure.customModels.CustomBottomModel;
 import com.exam.secure.entities.categoryEntities.BottomCategoryModel;
 import com.exam.secure.interfaces.categoryInterfaces.BottomCategoryInterface;
 import com.exam.secure.publicAllowanceController.modelTemp.BottomTempModel;
@@ -130,6 +131,35 @@ public class BottomCategoryService implements BottomCategoryInterface {
                   BottomTempModel bottomTempModel =   this.modelMapper.map(bottomCategoryModel, BottomTempModel.class);
                   list.add(bottomTempModel);
                   //System.out.println(bottomTempModel.toString());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<CustomBottomModel> getBottomCategoriesBySubIdRW(Long id) {
+        List<CustomBottomModel> list =new ArrayList<>();
+        try {
+            List<BottomCategoryModel> bottomCategoryData =  this.bottomCategoryRepository.getBottomCategoriesBySubCategoryId(id);
+
+            if(bottomCategoryData != null)
+            {
+                for(BottomCategoryModel bottomCategoryModel : bottomCategoryData)
+                {
+                    CustomBottomModel customBottomModel  =new CustomBottomModel();
+                    customBottomModel.setId(bottomCategoryModel.getId());
+                    customBottomModel.setBgColor(bottomCategoryModel.getBgColor());
+                    customBottomModel.setFileUrl(bottomCategoryModel.getFileUrl());
+                    customBottomModel.setSequenceNum(bottomCategoryModel.getSequenceNum());
+                    customBottomModel.setBottomCategoryName(bottomCategoryModel.getBottomCategoryName());
+                    customBottomModel.setBranchModel(bottomCategoryModel.getBranchModel());
+                    customBottomModel.setStatus(bottomCategoryModel.isStatus());
+                    list.add(customBottomModel);
+                }
             }
         }
         catch (Exception e)

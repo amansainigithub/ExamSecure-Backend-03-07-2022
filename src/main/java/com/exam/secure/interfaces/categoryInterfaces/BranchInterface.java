@@ -1,5 +1,6 @@
 package com.exam.secure.interfaces.categoryInterfaces;
 
+import com.exam.secure.customModels.CustomBranchModel;
 import com.exam.secure.entities.categoryEntities.BranchModel;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,8 @@ public interface BranchInterface {
     public BranchModel getBranchById(Long branchId);
 
     List<BranchModel> getBranchListByBottomCategoryId(Long bottomCategoryId);
+
+   List<CustomBranchModel> getBranchListBySubId(Long subId);
 
     BranchModel uploadBranchCategoryFile(MultipartFile file, Long id);
 }

@@ -1,5 +1,6 @@
 package com.exam.secure.interfaces.categoryInterfaces;
 
+import com.exam.secure.customModels.CustomBottomModel;
 import com.exam.secure.entities.categoryEntities.BottomCategoryModel;
 import com.exam.secure.publicAllowanceController.modelTemp.BottomTempModel;
 import org.springframework.stereotype.Component;
@@ -22,4 +23,7 @@ public interface BottomCategoryInterface {
     BottomCategoryModel uploadBottomCategoryFile(MultipartFile file, Long id);
 
     List<BottomTempModel> getBottomCategoriesBySubCategoryId_RC(Long subCategoryId); //Response Changed
+
+    List<CustomBottomModel> getBottomCategoriesBySubIdRW(Long id); //Response Changed
+
 }

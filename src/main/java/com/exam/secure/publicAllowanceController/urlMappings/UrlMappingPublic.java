@@ -18,6 +18,8 @@ public class UrlMappingPublic {
 
     public static final String GET_BRANCH_LIST_BY_BOTTOM_CATEGORY_ID_PUBLIC= "getBranchListByBottomCategoryIdPublic/{bottomCategoryId}";
 
+    public static final String GET_BRANCH_LIST_BY_SUB_ID= "getBranchListBySubId/{subId}";
+
     public static final String GET_QUESTION_ANSWER_LIST_BY_QUESTION_SET_ID_PUBLIC_RC  = "getQuestionAnswerListByQuestionSetIdPublic_RC/{id}";
 
     public static final String SUBMIT_QUIZ = "submitQuiz/{timeDuration}";

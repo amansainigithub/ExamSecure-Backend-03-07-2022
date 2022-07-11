@@ -15,4 +15,8 @@ public interface BranchRepository extends JpaRepository<BranchModel,Long> {
         List<BranchModel> getBranchListByBottomCategoryId(@Param("id") Long id);
 
 
+        @Query("SELECT u FROM BranchModel u WHERE u.bottomCategoryModel.subCategoryModel.id = :id")
+        List<BranchModel> getBranchListBySubId(@Param("id") Long id);
+
+
 }
